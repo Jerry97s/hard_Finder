@@ -6,6 +6,7 @@ public sealed class MemoItem : ObservableObject
 {
     private Guid _id = Guid.NewGuid();
     private string _title = "";
+    private string? _titleXaml;
     private string _body = "";
     private DateTimeOffset _createdAt = DateTimeOffset.Now;
     private DateTimeOffset _modifiedAt = DateTimeOffset.Now;
@@ -21,6 +22,13 @@ public sealed class MemoItem : ObservableObject
     {
         get => _title;
         set => SetProperty(ref _title, value);
+    }
+
+    /// <summary>제목 서식(선택 글꼴/크기 등) 저장용 XAML. 없으면 <see cref="Title"/>만 사용.</summary>
+    public string? TitleXaml
+    {
+        get => _titleXaml;
+        set => SetProperty(ref _titleXaml, value);
     }
 
     public string Body

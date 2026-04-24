@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:HdLabs.Memo"
         mc:Ignorable="d"
         Title="{Binding Title}"
-        Icon="{StaticResource HdAppIcon}"
+        Icon="pack://application:,,,/HdLabs.Common;component/Assets/hd_icon_green.png"
         Height="760"
-        Width="1040"
+        Width="860"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -23,44 +23,80 @@
     </Window.InputBindings>
 
     <Window.Resources>
-        <!-- 포레스트 민트 + 웜 페이퍼: 그라데이션으로 깊이만 살짝 -->
-        <LinearGradientBrush x:Key="MemoBarBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#E2F0EA" Offset="0"/>
-            <GradientStop Color="#B8D4C8" Offset="1"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="MemoBodyBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FEFFFE" Offset="0"/>
-            <GradientStop Color="#F2F7F5" Offset="0.55"/>
-            <GradientStop Color="#E8F1ED" Offset="1"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="MemoFooterBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#C9E0D6" Offset="0"/>
-            <GradientStop Color="#9CBEAE" Offset="1"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="MemoOuterBorderBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#D9EDE4" Offset="0"/>
-            <GradientStop Color="#9BB5AA" Offset="1"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="MemoListHeaderBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#D2EBE2" Offset="0"/>
-            <GradientStop Color="#B5D8CA" Offset="1"/>
-        </LinearGradientBrush>
-        <SolidColorBrush x:Key="MemoSectionDividerBrush" Color="#3A5248"/>
-        <SolidColorBrush x:Key="MemoToolbarIconBrush" Color="#2D4A40"/>
-        <SolidColorBrush x:Key="MemoTextBrush" Color="#263330"/>
-        <SolidColorBrush x:Key="MemoSliderTrackBrush" Color="#6E9084"/>
-        <SolidColorBrush x:Key="MemoSliderThumbStrokeBrush" Color="#C5DDD3"/>
-        <SolidColorBrush x:Key="MemoHoverWashBrush" Color="#26FFFFFF"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 디자이너가 App.xaml 머지를 읽지 못해도 MainWindow에서 스타일을 찾을 수 있게 -->
+                <ResourceDictionary Source="pack://application:,,,/HdLabs.Memo;component/Themes/MemoUiChrome.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- 포레스트 민트 + 웜 페이퍼: 그라데이션으로 깊이만 살짝 -->
+            <LinearGradientBrush x:Key="MemoBarBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#E2F0EA" Offset="0"/>
+                <GradientStop Color="#B8D4C8" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="MemoBodyBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FEFFFE" Offset="0"/>
+                <GradientStop Color="#F2F7F5" Offset="0.55"/>
+                <GradientStop Color="#E8F1ED" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="MemoFooterBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#C9E0D6" Offset="0"/>
+                <GradientStop Color="#9CBEAE" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="MemoOuterBorderBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#D9EDE4" Offset="0"/>
+                <GradientStop Color="#9BB5AA" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="MemoSectionDividerBrush" Color="#3A5248"/>
+            <SolidColorBrush x:Key="MemoToolbarIconBrush" Color="#2D4A40"/>
+            <SolidColorBrush x:Key="MemoTextBrush" Color="#263330"/>
+            <SolidColorBrush x:Key="MemoSliderTrackBrush" Color="#6E9084"/>
+            <SolidColorBrush x:Key="MemoSliderThumbStrokeBrush" Color="#C5DDD3"/>
+            <SolidColorBrush x:Key="MemoHoverWashBrush" Color="#26FFFFFF"/>
+            <!-- 떠 있는 메뉴/팝업: 본문 카드와 톤 맞춤, 완전 불투명 -->
+            <SolidColorBrush x:Key="MemoFlyoutPanelBrush" Color="#F0F6F2"/>
+            <SolidColorBrush x:Key="MemoFlyoutPanelBorderBrush" Color="#7BA896"/>
 
-        <Style x:Key="MemoIconButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+            <Style x:Key="MemoIconButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Padding" Value="10,8"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="HoverBg"
+                                Background="Transparent"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="HoverBg" Property="Background" Value="{StaticResource MemoHoverWashBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="HoverBg" Property="Background" Value="#40FFFFFF"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        <Style x:Key="MemoFormatTextButton" TargetType="Button" BasedOn="{StaticResource MemoIconButton}">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+
+        <!-- 팝업/리스트: 내용을 왼쪽으로 (MemoIconButton 템플릿이 Center 고정이라 별도 템플릿) -->
+        <Style x:Key="MemoPopupListButton" TargetType="Button" BasedOn="{StaticResource MemoFormatTextButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -68,7 +104,10 @@
                                 Background="Transparent"
                                 CornerRadius="8"
                                 Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ContentPresenter
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -83,46 +122,58 @@
             </Setter>
         </Style>
 
-        <Style x:Key="MemoFormatTextButton" TargetType="Button" BasedOn="{StaticResource MemoIconButton}">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-        </Style>
+        <!-- 푸터 콤보: 민트·포레스트 톤과 맞는 반투명 -->
+        <Style x:Key="MemoFooterCombo" TargetType="ComboBox">
+            <Setter Property="Background" Value="#55FFFFFF"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MemoOuterBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
+            <Setter Property="MinHeight" Value="26"/>
+            <!-- 하단 툴바: 드롭다운이 본문·카드 밖으로 길게 나가지 않게 높이 제한 -->
+            <Setter Property="MaxDropDownHeight" Value="220"/>
+                <Setter Property="Padding" Value="5,2"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="12.5"/>
+            </Style>
+            <Style x:Key="MemoFooterComboEditable" TargetType="ComboBox" BasedOn="{StaticResource MemoFooterCombo}">
+                <Setter Property="IsEditable" Value="True"/>
+                <Setter Property="StaysOpenOnEdit" Value="True"/>
+            </Style>
 
-        <Style x:Key="MemoSliderInvisibleRepeat" TargetType="RepeatButton">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RepeatButton">
-                        <Rectangle Fill="Transparent"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style x:Key="MemoSliderInvisibleRepeat" TargetType="RepeatButton">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RepeatButton">
+                            <Rectangle Fill="Transparent"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <!-- 참고: 갈회색 트랙 + 흰 원 썸(얇은 테두리) + 아래쪽 가벼운 그림자 -->
-        <Style x:Key="MemoFooterSlider" TargetType="Slider">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="TickPlacement" Value="None"/>
-            <Setter Property="IsSnapToTickEnabled" Value="False"/>
-            <!-- 트랙 클릭 시 커서 위치로 썸 이동 (기본 LargeChange 점프 방지) -->
-            <Setter Property="IsMoveToPointEnabled" Value="True"/>
-            <Setter Property="Minimum" Value="0.35"/>
-            <Setter Property="Maximum" Value="1"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="{StaticResource MemoSliderTrackBrush}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Slider">
-                        <Grid SnapsToDevicePixels="True" MinHeight="24">
-                            <Rectangle Height="2"
+            <!-- 참고: 갈회색 트랙 + 흰 원 썸(얇은 테두리) + 아래쪽 가벼운 그림자 -->
+            <Style x:Key="MemoFooterSlider" TargetType="Slider">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="TickPlacement" Value="None"/>
+                <Setter Property="IsSnapToTickEnabled" Value="False"/>
+                <!-- 트랙 클릭 시 커서 위치로 썸 이동 (기본 LargeChange 점프 방지) -->
+                <Setter Property="IsMoveToPointEnabled" Value="True"/>
+                <Setter Property="Minimum" Value="0.35"/>
+                <Setter Property="Maximum" Value="1"/>
+                <Setter Property="Height" Value="32"/>
+                <Setter Property="Foreground" Value="{StaticResource MemoSliderTrackBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Slider">
+                            <Grid SnapsToDevicePixels="True" MinHeight="24">
+                                <Rectangle Height="2"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch"
                                        Margin="12,0,12,0"
@@ -130,46 +181,47 @@
                                        RadiusX="1"
                                        RadiusY="1"
                                        Opacity="0.92"/>
-                            <Track x:Name="PART_Track" VerticalAlignment="Center">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static Slider.DecreaseLarge}"
+                                <Track x:Name="PART_Track" VerticalAlignment="Center">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static Slider.DecreaseLarge}"
                                                   Style="{StaticResource MemoSliderInvisibleRepeat}"/>
-                                </Track.DecreaseRepeatButton>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static Slider.IncreaseLarge}"
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static Slider.IncreaseLarge}"
                                                   Style="{StaticResource MemoSliderInvisibleRepeat}"/>
-                                </Track.IncreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb Width="24" Height="24">
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Grid Width="24" Height="24">
-                                                    <Ellipse Width="14"
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Width="24" Height="24">
+                                            <Thumb.Template>
+                                                <ControlTemplate TargetType="Thumb">
+                                                    <Grid Width="24" Height="24">
+                                                        <Ellipse Width="14"
                                                              Height="14"
                                                              Fill="#FFFFFF"
                                                              Stroke="{StaticResource MemoSliderThumbStrokeBrush}"
                                                              StrokeThickness="0.9"
                                                              HorizontalAlignment="Center"
                                                              VerticalAlignment="Center">
-                                                        <Ellipse.Effect>
-                                                            <DropShadowEffect BlurRadius="4"
+                                                            <Ellipse.Effect>
+                                                                <DropShadowEffect BlurRadius="4"
                                                                               ShadowDepth="2"
                                                                               Direction="270"
                                                                               Opacity="0.28"
                                                                               Color="#40000000"/>
-                                                        </Ellipse.Effect>
-                                                    </Ellipse>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                                            </Ellipse.Effect>
+                                                        </Ellipse>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Thumb.Template>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
 
     <!-- 참고 UI 구성: 스티키 카드 하나 = [상단바 | 본문 | 하단 툴바] 세로 스택만 -->
@@ -196,7 +248,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="464*"/>
+                    <RowDefinition Height="24*"/>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="93*"/>
                     <RowDefinition Height="1"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -237,6 +292,22 @@
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center">
+                            <Button Style="{StaticResource MemoIconButton}"
+                                    ToolTip="AI 비서"
+                                    Padding="8,8"
+                                    Click="AiAssistant_Click">
+                                <Border CornerRadius="8"
+                                        Background="#18FFFFFF"
+                                        BorderBrush="#559BB5AA"
+                                        BorderThickness="1"
+                                        Padding="8,4">
+                                    <TextBlock Text="AI"
+                                               FontFamily="Segoe UI"
+                                               FontWeight="SemiBold"
+                                               FontSize="14.5"
+                                               Foreground="{StaticResource MemoToolbarIconBrush}"/>
+                                </Border>
+                            </Button>
                             <Button Style="{StaticResource MemoIconButton}"
                                     ToolTip="더보기"
                                     Padding="8,8"
@@ -411,13 +482,12 @@
 
                 <Rectangle Grid.Row="1"
                            Height="1"
-                           VerticalAlignment="Stretch"
                            Fill="{StaticResource MemoSectionDividerBrush}"
                            SnapsToDevicePixels="True"/>
 
                 <!-- ═══ (2) 본문: 한 장의 노트처럼 한 덩어리 입력 영역 ═══ -->
                 <Border Grid.Row="2"
-                        Background="Transparent">
+                        Background="Transparent" Grid.RowSpan="4">
                     <Grid Margin="22,16,22,16">
 
                         <!-- 편집: 제목(첫 줄) + 본문 = 시각적으로 한 블록 (참고: 상단 한 줄 제목 느낌) -->
@@ -438,30 +508,87 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0"
-                                     Text="{Binding NewTitle, UpdateSourceTrigger=PropertyChanged}"
-                                     FontFamily="Segoe UI"
-                                     FontSize="18"
-                                     FontWeight="SemiBold"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Padding="0,0,0,6"
-                                     Foreground="{StaticResource MemoTextBrush}"/>
+                            <RichTextBox x:Name="MemoTitle"
+                                     Grid.Row="0"
+                                     AcceptsReturn="False"
+                                     VerticalScrollBarVisibility="Disabled"
+                                     HorizontalScrollBarVisibility="Hidden"
+                                     IsDocumentEnabled="True"
+                                     GotKeyboardFocus="MemoTitle_GotKeyboardFocus"
+                                     TextChanged="MemoTitle_TextChanged"
+                                     PreviewKeyDown="MemoTitle_PreviewKeyDown"
+                                     Style="{StaticResource MemoTitleRichTextBox}"/>
 
-                            <TextBox x:Name="MemoBody"
-                                     Grid.Row="1"
-                                     Text="{Binding NewBody, UpdateSourceTrigger=PropertyChanged}"
-                                     AcceptsReturn="True"
-                                     TextWrapping="Wrap"
-                                     VerticalScrollBarVisibility="Auto"
-                                     VerticalContentAlignment="Top"
-                                     FontFamily="Segoe UI"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="15"
-                                     Padding="0,2,0,0"
-                                     CaretBrush="{StaticResource MemoTextBrush}"
-                                     Foreground="{StaticResource MemoTextBrush}"/>
+                            <RichTextBox x:Name="MemoBody"
+                                         Grid.Row="1"
+                                         AcceptsReturn="True"
+                                         AllowDrop="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         VerticalContentAlignment="Top"
+                                         FontFamily="Malgun Gothic"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         FontSize="15"
+                                         Padding="0"
+                                         IsDocumentEnabled="True"
+                                         Foreground="{StaticResource MemoTextBrush}"
+                                         GotKeyboardFocus="MemoBody_GotKeyboardFocus"
+                                         TextChanged="MemoBody_TextChanged"
+                                         SelectionChanged="MemoBody_SelectionChanged"
+                                         PreviewDragOver="MemoBody_PreviewDragOver"
+                                         Drop="MemoBody_Drop"
+                                         MouseUp="MemoBody_FontContext_MouseUp"
+                                         KeyUp="MemoBody_FontContext_KeyUp"
+                                         Loaded="MemoBody_Loaded">
+                                <RichTextBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="잘라내기" InputGestureText="Ctrl+X" Click="MemoBodyContext_Cut_Click"/>
+                                        <MenuItem Header="복사" InputGestureText="Ctrl+C" Click="MemoBodyContext_Copy_Click"/>
+                                        <MenuItem Header="붙여넣기" InputGestureText="Ctrl+V" Click="MemoBodyContext_Paste_Click"/>
+                                        <Separator/>
+                                        <MenuItem Header="굵게"
+                                                  InputGestureText="Ctrl+B"
+                                                  Click="FormatBold_Click"/>
+                                        <MenuItem Header="기울임" Click="FormatItalic_Click"/>
+                                        <MenuItem Header="밑줄" Click="FormatUnderline_Click"/>
+                                        <MenuItem Header="취소선" Click="FormatStrike_Click"/>
+                                        <Separator/>
+                                        <MenuItem Header="자주 쓰는 글꼴">
+                                            <MenuItem Header="맑은 고딕" FontFamily="Malgun Gothic" Click="MemoBodyContext_FontFamily_Click" Tag="Malgun Gothic"/>
+                                            <MenuItem Header="돋움" FontFamily="Dotum" Click="MemoBodyContext_FontFamily_Click" Tag="Dotum"/>
+                                            <MenuItem Header="굴림" FontFamily="Gulim" Click="MemoBodyContext_FontFamily_Click" Tag="Gulim"/>
+                                            <MenuItem Header="Consolas" FontFamily="Consolas" Click="MemoBodyContext_FontFamily_Click" Tag="Consolas"/>
+                                            <MenuItem Header="Times New Roman" FontFamily="Times New Roman" Click="MemoBodyContext_FontFamily_Click" Tag="Times New Roman"/>
+                                            <MenuItem Header="Arial" FontFamily="Arial" Click="MemoBodyContext_FontFamily_Click" Tag="Arial"/>
+                                            <MenuItem Header="Segoe UI" FontFamily="Segoe UI" Click="MemoBodyContext_FontFamily_Click" Tag="Segoe UI"/>
+                                        </MenuItem>
+                                        <MenuItem Header="크기(프리셋) — 하단 단위·숫자와 같음">
+                                            <MenuItem Header="8" Click="MemoBodyContext_FontSizePreset_Click" Tag="8"/>
+                                            <MenuItem Header="9" Click="MemoBodyContext_FontSizePreset_Click" Tag="9"/>
+                                            <MenuItem Header="10" Click="MemoBodyContext_FontSizePreset_Click" Tag="10"/>
+                                            <MenuItem Header="12" Click="MemoBodyContext_FontSizePreset_Click" Tag="12"/>
+                                            <MenuItem Header="14" Click="MemoBodyContext_FontSizePreset_Click" Tag="14"/>
+                                            <MenuItem Header="15" Click="MemoBodyContext_FontSizePreset_Click" Tag="15"/>
+                                            <MenuItem Header="16" Click="MemoBodyContext_FontSizePreset_Click" Tag="16"/>
+                                            <MenuItem Header="18" Click="MemoBodyContext_FontSizePreset_Click" Tag="18"/>
+                                            <MenuItem Header="20" Click="MemoBodyContext_FontSizePreset_Click" Tag="20"/>
+                                            <MenuItem Header="24" Click="MemoBodyContext_FontSizePreset_Click" Tag="24"/>
+                                            <MenuItem Header="32" Click="MemoBodyContext_FontSizePreset_Click" Tag="32"/>
+                                        </MenuItem>
+                                        <MenuItem Header="크기 +1" Click="MemoBodyContext_FontSizeStep_Click" Tag="1"
+                                                  ToolTip="선택(또는 커서) 글자에 대해, 현재 단위에서 한 단계 큼"/>
+                                        <MenuItem Header="크기 -1" Click="MemoBodyContext_FontSizeStep_Click" Tag="-1"
+                                                  ToolTip="선택(또는 커서) 글자에 대해, 현재 단위에서 한 단계 작게"/>
+                                        <Separator/>
+                                        <MenuItem Header="크기 단위(표기) — 하단 콤보와 동기화" IsEnabled="False"
+                                                  ToolTip="아래 ‘포인트’ 또는 ‘px’를 고르면 하단 바의 pt/px 콤보박스가 같이 바뀝니다."/>
+                                        <MenuItem Header="포인트 (pt)" Click="MemoBodyContext_FontSizeUnitPt_Click"
+                                                  ToolTip="WPF는 내부 DIP(1/96)로 저장, 숫자는 인쇄 pt(1/72in)로 표기합니다."/>
+                                        <MenuItem Header="px (논리·레이아웃 픽셀)" Click="MemoBodyContext_FontSizeUnitPx_Click"
+                                                  ToolTip="WPF TextElement.FontSize와 같은 단위(디바이스 독립)입니다."/>
+                                    </ContextMenu>
+                                </RichTextBox.ContextMenu>
+                            </RichTextBox>
                         </Grid>
 
                         <!-- 목록: 같은 카드 안에서만 중앙 패널 교체 -->
@@ -501,11 +628,9 @@
                             </DockPanel>
 
                             <ListView x:Name="MemoList"
+                                      Style="{StaticResource MemoListView}"
                                       ItemsSource="{Binding Items}"
                                       SelectedItem="{Binding Selected}"
-                                      BorderThickness="1"
-                                      BorderBrush="{StaticResource MemoOuterBorderBrush}"
-                                      Background="#26FFFFFF"
                                       MouseDoubleClick="MemoList_OnMouseDoubleClick"
                                       KeyDown="MemoList_OnKeyDown">
                                 <ListView.ContextMenu>
@@ -514,14 +639,6 @@
                                         <MenuItem Header="삭제" Command="{Binding DeleteSelectedCommand}"/>
                                     </ContextMenu>
                                 </ListView.ContextMenu>
-                                <ListView.Resources>
-                                    <Style TargetType="GridViewColumnHeader">
-                                        <Setter Property="Background" Value="{StaticResource MemoListHeaderBrush}"/>
-                                        <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
-                                        <Setter Property="FontWeight" Value="SemiBold"/>
-                                        <Setter Property="Padding" Value="10,8"/>
-                                    </Style>
-                                </ListView.Resources>
 
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
@@ -552,70 +669,194 @@
                     </Grid>
                 </Border>
 
-                <Rectangle Grid.Row="3"
+                <Rectangle Grid.Row="6"
                            Height="1"
-                           VerticalAlignment="Stretch"
                            Fill="{StaticResource MemoSectionDividerBrush}"
                            SnapsToDevicePixels="True"/>
 
-                <!-- ═══ (3) 하단: 8칸 균등 ═══ -->
-                <Border Grid.Row="4"
+                <!-- ═══ (3) 하단: 글꼴·크기(왼쪽) + 서식 + 불투명도 ═══ -->
+                <Border Grid.Row="7"
                         MinHeight="54"
                         CornerRadius="0,0,16,16"
                         Background="{StaticResource MemoFooterBrush}"
                         ClipToBounds="True">
-                        <UniformGrid Rows="1"
-                                     Columns="8"
-                                     Margin="10,8,8,6">
-                            <Button Style="{StaticResource MemoFormatTextButton}"
-                                    FontWeight="Bold"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    Content="B"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="굵게 · 선택에 ** 추가"
-                                    Click="FormatBold_Click"/>
-                            <Button Style="{StaticResource MemoFormatTextButton}"
-                                    FontStyle="Italic"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    Content="/"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="기울임 · * *"
-                                    Click="FormatItalic_Click"/>
-                            <Button Style="{StaticResource MemoFormatTextButton}"
-                                    HorizontalAlignment="Center"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    ToolTip="밑줄"
-                                    Click="FormatUnderline_Click">
-                                <TextBlock FontFamily="Segoe UI"
+                        <Grid Margin="10,6,8,6">
+                        <Grid.ColumnDefinitions>
+                            <!-- 폰트/크기 + 서식 + 맞춤(3) + … ; 남는 폭은 * -->
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <!-- 남는 공간을 먹는 스페이서 -->
+                            <ColumnDefinition Width="*"/>
+                            <!-- 투명도 슬라이더는 길이 고정 -->
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="FontFamilyPicker"
+                                  Grid.Column="0"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  Margin="10,0,4,0"
+                                  Style="{StaticResource MemoFooterComboEditable}"
+                                  ToolTip="글꼴: 목록에서 고르거나 이름을 직접 입력 후 Enter(탭으로 적용)"
+                                  SelectionChanged="FontFamilyPicker_SelectionChanged"
+                                  DropDownOpened="FontFamilyPicker_DropDownOpened"
+                                  DropDownClosed="FontFamilyPicker_DropDownClosed"
+                                  LostKeyboardFocus="FontFamilyPicker_LostKeyboardFocus"
+                                  PreviewKeyDown="FontFamilyPicker_PreviewKeyDown">
+                            <!-- ComboBox 내부 편집 TextBox가 기본 TextBox 스타일을 끌고 와서 텍스트가 안 보이는 경우 방지 -->
+                            <ComboBox.Resources>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ComboBox.Resources>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Source}" FontFamily="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox x:Name="FontSizePicker"
+                                  Grid.Column="1"
+                                  Width="74"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,3,0"
+                                  Style="{StaticResource MemoFooterComboEditable}"
+                                  ToolTip="크기: 숫자 + 단위(오른쪽). pt=포인트(1/72), px=기기독립 픽셀(1/96) — WPF FontSize"
+                                  SelectionChanged="FontSizePicker_SelectionChanged"
+                                  DropDownOpened="FooterCombo_DropDownOpened"
+                                  LostKeyboardFocus="FontSizePicker_LostKeyboardFocus"
+                                  PreviewKeyDown="FontSizePicker_PreviewKeyDown">
+                            <ComboBox.Resources>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="{StaticResource MemoTextBrush}"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                        <ComboBox x:Name="FontSizeUnitPicker"
+                                  Grid.Column="2"
+                                  Width="40"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,6,0"
+                                  Style="{StaticResource MemoFooterCombo}"
+                                  ToolTip="pt(포인트) / px(레이아웃·논리 픽셀, WPF DIP와 동일)"
+                                  SelectionChanged="FontSizeUnitPicker_SelectionChanged"
+                                  DropDownOpened="FooterCombo_DropDownOpened"/>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="3"
+                                Margin="2,0,0,0"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource MemoToolbarIconBrush}"
+                                Content="B"
+                                HorizontalAlignment="Center"
+                                ToolTip="굵게"
+                                Click="FormatBold_Click"/>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="4"
+                                Margin="2,0,0,0"
+                                FontStyle="Italic"
+                                Foreground="{StaticResource MemoToolbarIconBrush}"
+                                Content="/"
+                                HorizontalAlignment="Center"
+                                ToolTip="기울임"
+                                Click="FormatItalic_Click"/>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="5"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource MemoToolbarIconBrush}"
+                                ToolTip="밑줄"
+                                Click="FormatUnderline_Click">
+                            <TextBlock FontFamily="Segoe UI"
                                            FontSize="17"
                                            Foreground="{StaticResource MemoToolbarIconBrush}"
                                            Text="U"
                                            TextDecorations="Underline"/>
-                            </Button>
-                            <Button Style="{StaticResource MemoFormatTextButton}"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="취소선 · ~~"
-                                    Click="FormatStrike_Click">
-                                <TextBlock Text="T"
+                        </Button>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="6"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="취소선"
+                                Click="FormatStrike_Click">
+                            <TextBlock Text="T"
                                            FontFamily="Segoe UI"
                                            FontSize="17"
                                            FontWeight="SemiBold"
                                            Foreground="{StaticResource MemoToolbarIconBrush}"
                                            TextDecorations="Strikethrough"/>
-                            </Button>
-                            <!-- 체크리스트: 둥근 사각 안에 체크만 (예시) -->
-                            <Button Style="{StaticResource MemoIconButton}"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="체크리스트 · 체크박스 줄 삽입"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    Click="InsertChecklistLine_Click">
-                                <Viewbox Width="22"
+                        </Button>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="7"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="왼쪽 맞춤(문단)"
+                                Click="FormatAlignLeft_Click">
+                            <Viewbox Width="20" Height="20" Stretch="Uniform">
+                                <Canvas Width="20" Height="20" SnapsToDevicePixels="True">
+                                    <Path Stroke="{StaticResource MemoToolbarIconBrush}" StrokeThickness="1.1"
+                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                          Data="M 2.5,5.5 h 6 M 2.5,10 h 8 M 2.5,14.5 h 4"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="8"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="가운데 맞춤(문단)"
+                                Click="FormatAlignCenter_Click">
+                            <Viewbox Width="20" Height="20" Stretch="Uniform">
+                                <Canvas Width="20" Height="20" SnapsToDevicePixels="True">
+                                    <Path Stroke="{StaticResource MemoToolbarIconBrush}" StrokeThickness="1.1"
+                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                          Data="M 5,5.5 h 10 M 3.5,10 h 13 M 5.5,14.5 h 9"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button Style="{StaticResource MemoFormatTextButton}"
+                                Grid.Column="9"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="오른쪽 맞춤(문단)"
+                                Click="FormatAlignRight_Click">
+                            <Viewbox Width="20" Height="20" Stretch="Uniform">
+                                <Canvas Width="20" Height="20" SnapsToDevicePixels="True">
+                                    <Path Stroke="{StaticResource MemoToolbarIconBrush}" StrokeThickness="1.1"
+                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                          Data="M 11.5,5.5 h 6 M 9,10 h 8.5 M 13.5,14.5 h 4"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button Style="{StaticResource MemoIconButton}"
+                                Grid.Column="10"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="체크리스트 — 체크박스를 직접 누를 수 있어요 (문단 끝에 한 줄)"
+                                Foreground="{StaticResource MemoToolbarIconBrush}"
+                                Click="InsertChecklistLine_Click">
+                            <Viewbox Width="22"
                                          Height="22"
                                          Stretch="Uniform">
-                                    <Canvas Width="20"
+                                <Canvas Width="20"
                                             Height="20"
                                             SnapsToDevicePixels="True">
-                                        <Rectangle Canvas.Left="2"
+                                    <Rectangle Canvas.Left="2"
                                                    Canvas.Top="2"
                                                    Width="16"
                                                    Height="16"
@@ -624,82 +865,163 @@
                                                    Stroke="{StaticResource MemoToolbarIconBrush}"
                                                    StrokeThickness="1"
                                                    Fill="Transparent"/>
-                                        <Path Stroke="{StaticResource MemoToolbarIconBrush}"
+                                    <Path Stroke="{StaticResource MemoToolbarIconBrush}"
                                               StrokeThickness="1.25"
                                               StrokeStartLineCap="Round"
                                               StrokeEndLineCap="Round"
                                               StrokeLineJoin="Round"
                                               Fill="Transparent"
                                               Data="M 6.5,10.5 L 9,13 L 13.5,7"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+
+                        <Grid Grid.Column="11"
+                              Margin="4,0,0,0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                            <Button x:Name="BulletAnchorButton"
+                                        Style="{StaticResource MemoIconButton}"
+                                        Foreground="{StaticResource MemoToolbarIconBrush}"
+                                        ToolTip="클릭: 가울점(·) — 마우스를 올리면 다른 기호를 고를 수 있어요"
+                                        Click="BulletAnchorButton_Click"
+                                        MouseEnter="BulletAnchorButton_MouseEnter"
+                                        MouseLeave="BulletAnchorButton_MouseLeave">
+                                <Viewbox Width="22"
+                                             Height="22"
+                                             Stretch="Uniform">
+                                    <Canvas Width="20"
+                                                Height="18"
+                                                SnapsToDevicePixels="True">
+                                        <Ellipse Canvas.Left="2"
+                                                     Canvas.Top="3"
+                                                     Width="2.2"
+                                                     Height="2.2"
+                                                     Fill="{StaticResource MemoToolbarIconBrush}"/>
+                                        <Rectangle Canvas.Left="6.5"
+                                                       Canvas.Top="3.6"
+                                                       Width="11"
+                                                       Height="1.15"
+                                                       Fill="{StaticResource MemoToolbarIconBrush}"
+                                                       RadiusX="0.5"
+                                                       RadiusY="0.5"/>
+                                        <Ellipse Canvas.Left="2"
+                                                     Canvas.Top="8"
+                                                     Width="2.2"
+                                                     Height="2.2"
+                                                     Fill="{StaticResource MemoToolbarIconBrush}"/>
+                                        <Rectangle Canvas.Left="6.5"
+                                                       Canvas.Top="8.6"
+                                                       Width="11"
+                                                       Height="1.15"
+                                                       Fill="{StaticResource MemoToolbarIconBrush}"
+                                                       RadiusX="0.5"
+                                                       RadiusY="0.5"/>
+                                        <Ellipse Canvas.Left="2"
+                                                     Canvas.Top="13"
+                                                     Width="2.2"
+                                                     Height="2.2"
+                                                     Fill="{StaticResource MemoToolbarIconBrush}"/>
+                                        <Rectangle Canvas.Left="6.5"
+                                                       Canvas.Top="13.6"
+                                                       Width="11"
+                                                       Height="1.15"
+                                                       Fill="{StaticResource MemoToolbarIconBrush}"
+                                                       RadiusX="0.5"
+                                                       RadiusY="0.5"/>
                                     </Canvas>
                                 </Viewbox>
                             </Button>
+                            <Popup x:Name="BulletStylesPopup"
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=BulletAnchorButton}"
+                                       AllowsTransparency="True"
+                                       StaysOpen="True"
+                                       PopupAnimation="Fade">
+                                <Border x:Name="BulletPopupContent"
+                                            Padding="4,2,2,4"
+                                            CornerRadius="8"
+                                            BorderBrush="{StaticResource MemoFlyoutPanelBorderBrush}"
+                                            BorderThickness="1.2"
+                                            Background="{StaticResource MemoFlyoutPanelBrush}"
+                                            MouseEnter="BulletPopupContent_MouseEnter"
+                                            MouseLeave="BulletPopupContent_MouseLeave">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="16"
+                                                              ShadowDepth="3"
+                                                              Direction="270"
+                                                              Opacity="0.28"
+                                                              Color="#FF203028"/>
+                                    </Border.Effect>
+                                    <StackPanel MinWidth="176">
+                                        <TextBlock Text="글머리 기호"
+                                                       FontSize="10.5"
+                                                       Foreground="{StaticResource MemoTextBrush}"
+                                                       Opacity="0.8"
+                                                       Margin="8,4,4,2"
+                                                       FontWeight="SemiBold"
+                                                       FontFamily="Segoe UI"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="· " Content="  ·  가울점"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="• " Content="  •  원형"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="◦ " Content="  ◦  둥근 흰 점"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="▪ " Content="  ▪  작은 사각"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="‣ " Content="  ‣  삼각(오른쪽)"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="– " Content="  –  짧은 대시"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                        <Button Style="{StaticResource MemoPopupListButton}"
+                                                    Padding="10,4"
+                                                    FontFamily="Segoe UI" FontSize="14"
+                                                    Foreground="{StaticResource MemoTextBrush}"
+                                                    Tag="1. " Content="  1.  번호(시작 1.)"
+                                                    Click="InsertBulletWithTag_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </Grid>
 
-                            <!-- 글머리: 왼쪽 세 점 + 각 줄 (예시) -->
-                            <Button Style="{StaticResource MemoIconButton}"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="글머리 · · 줄 삽입"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    Click="InsertBulletLine_Click">
-                                <Viewbox Width="22"
+                        <Button Style="{StaticResource MemoIconButton}"
+                                Grid.Column="12"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Center"
+                                ToolTip="이미지 삽입 — 파일 선택(또는 이미지 파일을 본문으로 드래그)"
+                                Foreground="{StaticResource MemoToolbarIconBrush}"
+                                Click="InsertImageFromFile_Click">
+                            <Viewbox Width="22"
                                          Height="22"
                                          Stretch="Uniform">
-                                    <Canvas Width="20"
-                                            Height="18"
-                                            SnapsToDevicePixels="True">
-                                        <Ellipse Canvas.Left="2"
-                                                 Canvas.Top="3"
-                                                 Width="2.2"
-                                                 Height="2.2"
-                                                 Fill="{StaticResource MemoToolbarIconBrush}"/>
-                                        <Rectangle Canvas.Left="6.5"
-                                                   Canvas.Top="3.6"
-                                                   Width="11"
-                                                   Height="1.15"
-                                                   Fill="{StaticResource MemoToolbarIconBrush}"
-                                                   RadiusX="0.5"
-                                                   RadiusY="0.5"/>
-                                        <Ellipse Canvas.Left="2"
-                                                 Canvas.Top="8"
-                                                 Width="2.2"
-                                                 Height="2.2"
-                                                 Fill="{StaticResource MemoToolbarIconBrush}"/>
-                                        <Rectangle Canvas.Left="6.5"
-                                                   Canvas.Top="8.6"
-                                                   Width="11"
-                                                   Height="1.15"
-                                                   Fill="{StaticResource MemoToolbarIconBrush}"
-                                                   RadiusX="0.5"
-                                                   RadiusY="0.5"/>
-                                        <Ellipse Canvas.Left="2"
-                                                 Canvas.Top="13"
-                                                 Width="2.2"
-                                                 Height="2.2"
-                                                 Fill="{StaticResource MemoToolbarIconBrush}"/>
-                                        <Rectangle Canvas.Left="6.5"
-                                                   Canvas.Top="13.6"
-                                                   Width="11"
-                                                   Height="1.15"
-                                                   Fill="{StaticResource MemoToolbarIconBrush}"
-                                                   RadiusX="0.5"
-                                                   RadiusY="0.5"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-
-                            <!-- 이미지: 체크와 동일 크기 둥근 사각 + 산맥 실루엣 + 우상단 점 (예시) -->
-                            <Button Style="{StaticResource MemoIconButton}"
-                                    HorizontalAlignment="Center"
-                                    ToolTip="이미지 자리 표시 [이미지]"
-                                    Foreground="{StaticResource MemoToolbarIconBrush}"
-                                    Click="InsertImagePlaceholder_Click">
-                                <Viewbox Width="22"
-                                         Height="22"
-                                         Stretch="Uniform">
-                                    <Canvas Width="20"
+                                <Canvas Width="20"
                                             Height="20"
                                             SnapsToDevicePixels="True">
-                                        <Rectangle Canvas.Left="2"
+                                    <Rectangle Canvas.Left="2"
                                                    Canvas.Top="2"
                                                    Width="16"
                                                    Height="16"
@@ -708,27 +1030,29 @@
                                                    Stroke="{StaticResource MemoToolbarIconBrush}"
                                                    StrokeThickness="1"
                                                    Fill="Transparent"/>
-                                        <Ellipse Canvas.Left="13.5"
+                                    <Ellipse Canvas.Left="13.5"
                                                  Canvas.Top="4"
                                                  Width="2.4"
                                                  Height="2.4"
                                                  Fill="{StaticResource MemoToolbarIconBrush}"/>
-                                        <Path Stroke="{StaticResource MemoToolbarIconBrush}"
+                                    <Path Stroke="{StaticResource MemoToolbarIconBrush}"
                                               StrokeThickness="1"
                                               StrokeLineJoin="Round"
                                               Fill="Transparent"
                                               Data="M 5,15.5 L 7.5,10 L 10,12.5 L 12.5,8 L 15,15.5"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
 
-                            <Slider Style="{StaticResource MemoFooterSlider}"
-                                    VerticalAlignment="Center"
-                                    Margin="8,0,0,0"
-                                    HorizontalAlignment="Stretch"
-                                    ToolTip="창 불투명도 · 왼쪽(투명에 가깝게) ↔ 오른쪽(완전 불투명)"
-                                    Value="{Binding ElementName=RootWindow, Path=Opacity, Mode=TwoWay}"/>
-                        </UniformGrid>
+                        <Slider Style="{StaticResource MemoFooterSlider}"
+                                Grid.Column="13"
+                                VerticalAlignment="Center"
+                                Margin="10,0,0,0"
+                                Width="100"
+                                HorizontalAlignment="Left"
+                                ToolTip="창 불투명도 · 왼쪽(투명에 가깝게) ↔ 오른쪽(완전 불투명)"
+                                Value="{Binding ElementName=RootWindow, Path=Opacity, Mode=TwoWay}"/>
+                    </Grid>
                 </Border>
             </Grid>
         </Border>

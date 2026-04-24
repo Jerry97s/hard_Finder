@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using HdLabs.Common.Mvvm;
+using HdLabs.Memo.Helpers;
 using HdLabs.Memo.Models;
 using HdLabs.Memo.Services;
 
@@ -13,6 +14,7 @@ public sealed class MainViewModel : ViewModelBase
     private readonly MemoDataService _data = new();
     private MemoDataRoot _root = new();
     private string _newTitle = "";
+    private string _newTitleXaml = "";
     private string _newBody = "";
     private MemoItem? _selected;
     private string _currentView = "Editor";
@@ -49,6 +51,19 @@ public sealed class MainViewModel : ViewModelBase
         set
         {
             if (!SetProperty(ref _newTitle, value))
+                return;
+            if (!_suppressDirty)
+                _isDirty = true;
+            RestartAutoSave();
+        }
+    }
+
+    public string NewTitleXaml
+    {
+        get => _newTitleXaml;
+        set
+        {
+            if (!SetProperty(ref _newTitleXaml, value))
                 return;
             if (!_suppressDirty)
                 _isDirty = true;
@@ -180,7 +195,7 @@ public sealed class MainViewModel : ViewModelBase
 
     private void New()
     {
-        if (_isDirty && (NewTitle.Length > 0 || NewBody.Length > 0))
+        if (_isDirty && (NewTitle.Length > 0 || !MemoBodyDocumentHelper.IsBodyVisuallyEmpty(NewBody)))
         {
             var r = MessageBox.Show(
                 "편집 중인 내용이 있습니다. 저장하지 않고 새 메모를 시작할까요?\n(아니요: 취소, 예: 지우고 새로)",
@@ -196,8 +211,10 @@ public sealed class MainViewModel : ViewModelBase
         try
         {
             _newTitle = "";
+            _newTitleXaml = "";
             _newBody = "";
             OnPropertyChanged(nameof(NewTitle));
+            OnPropertyChanged(nameof(NewTitleXaml));
             OnPropertyChanged(nameof(NewBody));
             _isDirty = false;
         }
@@ -221,8 +238,10 @@ public sealed class MainViewModel : ViewModelBase
         try
         {
             _newTitle = Selected.Title;
+            _newTitleXaml = Selected.TitleXaml ?? "";
             _newBody = Selected.Body;
             OnPropertyChanged(nameof(NewTitle));
+            OnPropertyChanged(nameof(NewTitleXaml));
             OnPropertyChanged(nameof(NewBody));
             _isDirty = false;
         }
@@ -250,8 +269,10 @@ public sealed class MainViewModel : ViewModelBase
             try
             {
                 _newTitle = "";
+                _newTitleXaml = "";
                 _newBody = "";
                 OnPropertyChanged(nameof(NewTitle));
+                OnPropertyChanged(nameof(NewTitleXaml));
                 OnPropertyChanged(nameof(NewBody));
                 _isDirty = false;
             }
@@ -296,16 +317,18 @@ public sealed class MainViewModel : ViewModelBase
             if (item is not null)
             {
                 item.Title = title;
+                item.TitleXaml = string.IsNullOrWhiteSpace(NewTitleXaml) ? null : NewTitleXaml;
                 item.Body = body;
                 item.ModifiedAt = now;
             }
         }
-        else if (!string.IsNullOrEmpty(NewTitle) || !string.IsNullOrEmpty(NewBody))
+        else if (!string.IsNullOrEmpty(NewTitle) || !MemoBodyDocumentHelper.IsBodyVisuallyEmpty(NewBody))
         {
             var item = new MemoItem
             {
                 Id = Guid.NewGuid(),
                 Title = title,
+                TitleXaml = string.IsNullOrWhiteSpace(NewTitleXaml) ? null : NewTitleXaml,
                 Body = body,
                 CreatedAt = now,
                 ModifiedAt = now,
@@ -321,7 +344,8 @@ public sealed class MainViewModel : ViewModelBase
     {
         if (CurrentView != "Editor" || _suppressDirty)
             return;
-        if (_editingId is null && string.IsNullOrEmpty(NewTitle) && string.IsNullOrEmpty(NewBody))
+        if (_editingId is null && string.IsNullOrEmpty(NewTitle) && string.IsNullOrEmpty(NewTitleXaml)
+            && MemoBodyDocumentHelper.IsBodyVisuallyEmpty(NewBody))
             return;
         _autoSave.Stop();
         _autoSave.Start();
